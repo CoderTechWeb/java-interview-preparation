@@ -1,58 +1,50 @@
 package thread;
 
 public class OddEven {
-    private int number = 1;
-    private int limit = 10;
+   private int start = 1;
+   private final int limit = 10;
 
-    public synchronized void printEven() throws InterruptedException {
-        while(number <= limit) {
+   public synchronized void printEven() {
+       while (start <= limit) {
+           while (start % 2 != 0 && start <= limit) {
+               try {
+                   wait();
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
 
-            while(number % 2 != 0 && number <= limit){
-                wait();
-            }
+           if (start <= limit){
+               System.out.println("Even Thread : " + start);
+               start++;
+               notifyAll();
+           }
+       }
+   }
 
-            if (number <= limit) {
-                System.out.println("Even Thread : " + number);
-                number++;
-                notifyAll();
-            }
-
-        }
-    }
-
-    public synchronized void printOdd() throws InterruptedException {
-        while (number <= limit) {
-            while (number % 2 == 0 && number <= limit){
-                wait();
-            }
-
-            if (number <= limit) {
-                System.out.println("Odd Thread : " + number);
-                number++;
-                notifyAll();
-            }
-        }
-    }
+   public synchronized void printOdd() {
+       while (start <= limit) {
+           while (start % 2 == 0 && start <= limit) {
+               try {
+                   wait();
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+           if (start <= limit) {
+               System.out.println("Odd Thread : " + start);
+               start++;
+               notifyAll();
+           }
+       }
+   }
 
     static void main(String[] args) {
+
         OddEven oddEven = new OddEven();
 
-        Thread evenThread = new Thread(() -> {
-            try {
-                oddEven.printEven();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        Thread oddThread = new Thread(() -> {
-            try {
-                oddEven.printOdd();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
+        Thread evenThread = new Thread(oddEven::printEven);
+        Thread oddThread = new Thread(oddEven::printOdd);
         evenThread.start();
         oddThread.start();
     }
