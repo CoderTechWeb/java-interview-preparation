@@ -36,7 +36,6 @@ public class ProducerConsumerBlockingQueue {
             System.out.println("Produced: " + value);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            return;
         }
     }
 
