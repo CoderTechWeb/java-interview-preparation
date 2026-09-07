@@ -21,8 +21,6 @@ public class MaximumSubarray {
             cur = Math.max( arr[i], cur+arr[i]);
             maxSum=Math.max(cur, maxSum);
         }
-
         System.out.println(maxSum);
-
     }
 }
