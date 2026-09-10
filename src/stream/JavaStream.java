@@ -249,7 +249,8 @@ public class JavaStream {
 
     //Fnd the number of Male and Female employees in each department.
     public static  Map<String, Map<String, Long>>  findNumberOfMaleAndFemailinEachDept(List<Employee> empList) {
-        return empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+        return empList.stream().collect(Collectors.groupingBy(Employee::getDeptName,
+                Collectors.groupingBy(Employee::getGender, Collectors.counting())));
     }
 
     //Find average and total salary of the organization.
@@ -266,8 +267,8 @@ public class JavaStream {
 
     //Find all employees who lives in ‘Bengaluru’ city, sort them by their name and return the names of the employees.
     public static List<String> findEmployeeNamesByCitySorted(List<Employee> empList) {
-        return empList.stream().filter(e -> e.getCity().equalsIgnoreCase("Bengaluru"))
-                .sorted(Comparator.comparing(Employee::getName)).map(Employee::getName).toList();
+       return empList.stream().filter(e->e.getCity().equalsIgnoreCase("Bengaluru"))
+               .sorted(Comparator.comparing(Employee::getName)).map(Employee::getName).toList();
     }
 
     //Find Highest experienced employee in the organization.
@@ -277,14 +278,13 @@ public class JavaStream {
 
     //Find the names of the departments that have more than three employees
     public static List<String> getNameofDepartMoreThanThreeEmp(List<Employee> empList) {
-        return empList.stream().collect(Collectors.groupingBy(Employee::getDeptName,
-                        Collectors.counting())).entrySet().stream().filter(e -> e.getValue() > 3)
-                .map(Map.Entry::getKey).toList();
+        return empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting()))
+                .entrySet().stream().filter(e->e.getValue()>3).map(Map.Entry::getKey).toList();
     }
 
     //Find maximum age of an Employee from Employee List
     public static int getMaximumAgeOfEmployee(List<Employee> empList) {
-        return empList.stream().max(Comparator.comparing(Employee::getAge)).get().getAge();
+         return empList.stream().max(Comparator.comparing(Employee::getAge)).get().getAge();
     }
 
     //Find the department name which has the highest number of employees.

@@ -2,6 +2,7 @@ package leetCode;
 
 import java.util.Set;
 import java.util.HashSet;
+
 public class FindDuplicateNumber {
 
     static void main(String[] args) {
@@ -10,7 +11,7 @@ public class FindDuplicateNumber {
 
         for (int num:nums){
             if(set.contains(num)){
-                System.out.println(num);
+               System.out.println(num);
             }
 
             set.add(num);
