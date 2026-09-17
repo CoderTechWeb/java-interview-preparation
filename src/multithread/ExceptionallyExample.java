@@ -16,6 +16,7 @@ public class ExceptionallyExample {
             System.out.println("Handling error: " + ex.getMessage());
             return "Default Value";
         });
+
     }
 
 

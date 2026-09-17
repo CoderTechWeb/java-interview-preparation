@@ -2,6 +2,7 @@ package InterviewProgram;
 
 import java.util.Arrays;
 
+//product of the 3 largest numbers.
 public class MaxProdByNNumber {
 
     static void main(String[] args) {
